@@ -16,10 +16,10 @@ export const BRAND = {
   
   // 🖼️ HERO BACKGROUND: 
   // A moody, cinematic image works best here (e.g., your 'tree at night in fog' or 'car parked at night')
-  heroBackground: "https://picsum.photos/seed/tree-night/1920/1080",
+  heroBackground: "/20180528_192136.jpg",
   
   // 👤 PROFILE PICTURE:
-  profilePicture: "https://picsum.photos/seed/profile-man/800/800",
+  profilePicture: "/devtrivi-profile.jpg",
 
   socials: {
     github: "https://github.com",
@@ -35,7 +35,7 @@ export const PROJECTS = [
     description: 'A peaceful digital retreat and sanctuary for feline friends and their admirers.',
     link: 'https://catmonastery.gatrivi.com',
     // 🖼️ PROJECT THUMBNAIL:
-    image: 'https://picsum.photos/seed/zen-garden/800/600',
+    image: "/zen.jpg",
     tags: ['React', 'Tailwind', 'Sanctuary']
   },
   {
@@ -43,7 +43,7 @@ export const PROJECTS = [
     description: 'Intelligent assistance and task management tailored for your daily workflow.',
     link: 'https://catintassist.gatrivi.com',
     // 🖼️ PROJECT THUMBNAIL:
-    image: 'https://picsum.photos/seed/laptop-snow/800/600',
+    image: "/will.jpg",
     tags: ['AI', 'Productivity', 'Assistant']
   },
   {
@@ -51,7 +51,7 @@ export const PROJECTS = [
     description: 'A beautiful, elegant, and responsive web experience with a focus on typography.',
     link: 'https://rosario.gatrivi.com',
     // 🖼️ PROJECT THUMBNAIL:
-    image: 'https://picsum.photos/seed/bougainvillea/800/600',
+    image: "/20190615_161902.jpg",
     tags: ['Design', 'Typography', 'Portfolio']
   },
   {
@@ -59,7 +59,7 @@ export const PROJECTS = [
     description: 'Your favorite reading companion, offering a distraction-free environment.',
     link: 'https://catreader.gatrivi.com',
     // 🖼️ PROJECT THUMBNAIL:
-    image: 'https://picsum.photos/seed/typewriter/800/600',
+    image: "/snow2.jpg",
     tags: ['Reading', 'Minimalist', 'Web App']
   }
 ];
@@ -69,53 +69,53 @@ export const PROJECTS = [
 // Replace these with your uploaded images (the angel sketch, yorkie, red sunglasses, etc.)
 export const GALLERY = [
   { 
-    src: 'https://picsum.photos/seed/tree-night/800/800', 
-    alt: 'Tree at night in fog', 
-    span: 'md:col-span-2 md:row-span-2' // Large feature image
-  },
-  { 
-    src: 'https://picsum.photos/seed/green-trees/600/600', 
-    alt: 'Looking up at green trees', 
-    span: 'col-span-1' 
-  },
-  { 
-    src: 'https://picsum.photos/seed/car-night/800/600', 
-    alt: 'Car parked at night', 
-    span: 'col-span-1' 
-  },
-  { 
-    src: 'https://picsum.photos/seed/red-sunglasses/800/400', 
-    alt: 'Person with red sunglasses', 
-    span: 'md:col-span-2' // Wide image
-  },
-  { 
-    src: 'https://picsum.photos/seed/stacked-stones/600/800', 
-    alt: 'Stacked black stones', 
-    span: 'col-span-1 md:row-span-2' // Tall image
-  },
-  { 
-    src: 'https://picsum.photos/seed/colorful-decorations/800/600', 
-    alt: 'Colorful decorations', 
-    span: 'col-span-1' 
-  },
-  { 
-    src: 'https://picsum.photos/seed/yorkie-roof/600/600', 
-    alt: 'Yorkshire Terrier on roof', 
-    span: 'col-span-1' 
-  },
-  { 
-    src: 'https://picsum.photos/seed/catboard/800/400', 
+    src: '/catboard.jpg', 
     alt: 'Catboard longboard', 
-    span: 'md:col-span-2' // Wide image
+    span: 'md:col-span-2 md:row-span-2' 
   },
   { 
-    src: 'https://picsum.photos/seed/angel-sketch/600/600', 
-    alt: 'Pencil sketch of angel', 
+    src: '/20180210_102549.jpg', 
+    alt: 'Yorkie', 
     span: 'col-span-1' 
   },
   { 
-    src: 'https://picsum.photos/seed/snowboard-legs/1200/600', 
-    alt: 'Snowboard overlooking mountain', 
-    span: 'md:col-span-3' // Full width footer image
+    src: '/snow2.jpg', 
+    alt: 'Snowboarding', 
+    span: 'col-span-1' 
+  },
+  { 
+    src: '/20190615_161902.jpg', 
+    alt: 'Safari cake', 
+    span: 'md:col-span-2' 
+  },
+  { 
+    src: '/will.jpg', 
+    alt: 'Sketch', 
+    span: 'col-span-1 md:row-span-2' 
+  },
+  { 
+    src: '/zen.jpg', 
+    alt: 'Zen stones', 
+    span: 'col-span-1' 
+  },
+  { 
+    src: '/20180528_192136.jpg', 
+    alt: 'Street at night', 
+    span: 'col-span-1' 
+  },
+  { 
+    src: '/gat_20161003_133228~2.jpg', 
+    alt: 'Outdoor scenery', 
+    span: 'md:col-span-2' 
+  },
+  { 
+    src: '/gat_20161015_172042.jpg', 
+    alt: 'Personal photo', 
+    span: 'col-span-1' 
+  },
+  { 
+    src: '/self.jpg', 
+    alt: 'Self portrait', 
+    span: 'md:col-span-3' 
   },
 ];
