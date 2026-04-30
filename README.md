@@ -1,20 +1,38 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Gatrivi Portfolio
 
-# Run and deploy your AI Studio app
+Personal developer portfolio built with React, Vite, Tailwind CSS, and Framer Motion.
 
-This contains everything you need to run your app locally.
+**Live site:** [gatrivi.com](https://gatrivi.com)
 
-View your app in AI Studio: https://ai.studio/apps/00e760c2-abaa-4663-8ad0-f41ac4538339
+## Tech Stack
+
+- **Framework:** React 19 + Vite
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animation:** Framer Motion (`motion/react`)
+- **Icons:** Lucide React
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+## Build
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm run build
+```
+
+## Projects Featured
+
+- Challenge Zero
+- Cat Monastery
+- Cat Int Assist
+- Rosario Architecture
+- Cat Reader *(coming soon)*
+
+---
+
+Built by [Gatrivi](https://github.com/gatrivi)

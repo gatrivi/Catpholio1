@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
 import { PROJECTS } from '../content';
 
 export const Projects = () => {
@@ -29,6 +29,9 @@ export const Projects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop';
+                  }}
                 />
                 <div className="absolute inset-0 bg-zinc-950/20 group-hover:bg-transparent transition-colors duration-500" />
               </div>
@@ -36,19 +39,44 @@ export const Projects = () => {
               <div className="p-8 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-2xl font-bold tracking-tight text-zinc-100">{project.title}</h3>
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-zinc-500 hover:text-zinc-100 transition-colors p-2 -mr-2 -mt-2 rounded-full hover:bg-zinc-800"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
+                  <div className="flex items-center gap-1 -mr-2 -mt-2">
+                    {project.repo && (
+                      <a
+                        href={project.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-500 hover:text-zinc-100 transition-colors p-2 rounded-full hover:bg-zinc-800"
+                        aria-label={`View ${project.title} source code`}
+                      >
+                        <Github size={20} />
+                      </a>
+                    )}
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-zinc-500 hover:text-zinc-100 transition-colors p-2 rounded-full hover:bg-zinc-800"
+                      aria-label={`View ${project.title} project`}
+                    >
+                      <ExternalLink size={20} />
+                    </a>
+                  </div>
                 </div>
                 
-                <p className="text-zinc-400 mb-8 font-light leading-relaxed flex-grow">
+                <p className="text-zinc-400 mb-5 font-light leading-relaxed">
                   {project.description}
                 </p>
+
+                {project.highlights && (
+                  <ul className="space-y-2 mb-6">
+                    {project.highlights.map((h, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-zinc-300">
+                        <span className="w-1 h-1 rounded-full bg-zinc-500 mt-2 shrink-0" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.tags.map((tag, i) => (

@@ -29,6 +29,9 @@ export const Gallery = () => {
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out"
                 referrerPolicy="no-referrer"
                 loading="lazy"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop';
+                }}
               />
               {/* Subtle overlay on hover */}
               <div className="absolute inset-0 bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">

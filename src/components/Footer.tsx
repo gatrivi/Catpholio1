@@ -11,8 +11,9 @@ export const Footer = () => {
 
         <div className="flex gap-8 text-sm font-mono uppercase tracking-widest text-zinc-500">
           <a href={BRAND.socials.github} className="hover:text-zinc-100 transition-colors">GitHub</a>
-          <a href={BRAND.socials.twitter} className="hover:text-zinc-100 transition-colors">Twitter</a>
+          <a href={BRAND.socials.twitter} className="hover:text-zinc-100 transition-colors">X</a>
           <a href={BRAND.socials.linkedin} className="hover:text-zinc-100 transition-colors">LinkedIn</a>
+          <a href={BRAND.socials.carrd} className="hover:text-zinc-100 transition-colors">Carrd</a>
         </div>
       </div>
     </footer>
