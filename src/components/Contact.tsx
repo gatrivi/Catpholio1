@@ -1,22 +1,41 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
-import { Mail, Send, ArrowUpRight, Download } from 'lucide-react';
+import { Mail, Send, ArrowUpRight, Loader2, AlertCircle } from 'lucide-react';
 import { CONTACT, BRAND } from '../content';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Fallback: open mailto with pre-filled data if no form endpoint is configured
+    
+    // Fallback: open mailto if no endpoint
     if (!CONTACT.formEndpoint) {
       const subject = encodeURIComponent(`Portfolio contact from ${formData.name}`);
       const body = encodeURIComponent(`From: ${formData.name} <${formData.email}>\n\n${formData.message}`);
       window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`;
-    } else {
-      // TODO: Implement fetch POST to CONTACT.formEndpoint
-      setSubmitted(true);
+      return;
+    }
+
+    setStatus('submitting');
+
+    try {
+      const response = await fetch(CONTACT.formEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
     }
   };
 
@@ -34,6 +53,9 @@ export const Contact = () => {
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">
               {CONTACT.headline}
             </h2>
+            <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-10">
+              06 — Get In Touch
+            </p>
             <p className="text-zinc-400 text-lg leading-relaxed mb-10 max-w-md">
               {CONTACT.subheadline}
             </p>
@@ -68,24 +90,6 @@ export const Contact = () => {
                   </div>
                 </a>
               )}
-
-              {/* TODO: Uncomment when CV link is ready */}
-              {/* {BRAND.cv && (
-                <a
-                  href={BRAND.cv}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-zinc-300 hover:text-zinc-100 transition-colors group"
-                >
-                  <span className="p-3 rounded-full bg-zinc-900 border border-zinc-800 group-hover:border-zinc-600 transition-colors">
-                    <Download size={20} />
-                  </span>
-                  <div>
-                    <p className="text-sm text-zinc-500 font-mono uppercase tracking-wider">Resume</p>
-                    <p className="font-medium">Download CV (PDF)</p>
-                  </div>
-                </a>
-              )} */}
             </div>
           </motion.div>
 
@@ -96,14 +100,24 @@ export const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {submitted ? (
-              <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center">
+            {status === 'success' ? (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 text-center"
+              >
                 <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Send size={24} className="text-zinc-100" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-100 mb-2">Message sent</h3>
                 <p className="text-zinc-400">Thanks for reaching out. I'll get back to you shortly.</p>
-              </div>
+                <button 
+                  onClick={() => setStatus('idle')}
+                  className="mt-6 text-sm font-mono text-zinc-500 hover:text-zinc-100 underline underline-offset-4"
+                >
+                  Send another message
+                </button>
+              </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 space-y-6">
                 <div>
@@ -114,9 +128,10 @@ export const Contact = () => {
                     type="text"
                     id="name"
                     required
+                    disabled={status === 'submitting'}
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
+                    className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors disabled:opacity-50"
                     placeholder="Your name"
                   />
                 </div>
@@ -128,9 +143,10 @@ export const Contact = () => {
                     type="email"
                     id="email"
                     required
+                    disabled={status === 'submitting'}
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
+                    className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors disabled:opacity-50"
                     placeholder="you@company.com"
                   />
                 </div>
@@ -142,24 +158,38 @@ export const Contact = () => {
                     id="message"
                     required
                     rows={5}
+                    disabled={status === 'submitting'}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors resize-none"
+                    className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-xl text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors resize-none disabled:opacity-50"
                     placeholder="Tell me about your project, role, or idea..."
                   />
                 </div>
+
+                {status === 'error' && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm font-mono p-3 bg-red-400/10 border border-red-400/20 rounded-lg">
+                    <AlertCircle size={16} />
+                    Something went wrong. Please try again.
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full px-6 py-4 bg-zinc-100 text-zinc-950 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors"
+                  disabled={status === 'submitting'}
+                  className="w-full px-6 py-4 bg-zinc-100 text-zinc-950 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send size={18} />
-                  Send Message
+                  {status === 'submitting' ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Send Message
+                    </>
+                  )}
                 </button>
-                {!CONTACT.formEndpoint && (
-                  <p className="text-xs text-zinc-600 text-center font-mono">
-                    Opens your email client. No data is stored on a server.
-                  </p>
-                )}
               </form>
             )}
           </motion.div>

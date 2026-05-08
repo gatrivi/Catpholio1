@@ -1,19 +1,71 @@
-import { BRAND } from '../content';
+import { BRAND, NAV } from '../content';
+import { ArrowUp } from 'lucide-react';
 
 export const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="px-6 md:px-12 lg:px-24 py-12 bg-zinc-950 border-t border-zinc-800">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-        <div>
-          <p className="font-bold text-xl tracking-tighter text-zinc-100">{BRAND.name}</p>
-          <p className="text-zinc-500 text-sm mt-1">© {new Date().getFullYear()} — Built with precision.</p>
+    <footer className="px-6 md:px-12 lg:px-24 py-20 bg-zinc-950 border-t border-zinc-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="md:col-span-2">
+            <a href="#" className="text-2xl font-bold tracking-tighter text-zinc-100 flex items-center gap-2 mb-4">
+              <span className="w-8 h-8 bg-zinc-100 text-zinc-950 flex items-center justify-center rounded-lg font-black text-sm">
+                G
+              </span>
+              {BRAND.name}
+            </a>
+            <p className="text-zinc-500 max-w-sm leading-relaxed">
+              {BRAND.title}. Building scalable, architecture-first applications with precision and intent.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="font-mono text-sm uppercase tracking-widest text-zinc-100 mb-6">Navigation</h4>
+            <ul className="space-y-4">
+              {NAV.map(link => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-zinc-500 hover:text-zinc-100 transition-colors text-sm">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-mono text-sm uppercase tracking-widest text-zinc-100 mb-6">Social</h4>
+            <ul className="space-y-4">
+              {Object.entries(BRAND.socials).map(([key, value]) => (
+                <li key={key}>
+                  <a 
+                    href={value} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-zinc-500 hover:text-zinc-100 transition-colors text-sm capitalize"
+                  >
+                    {key}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="flex gap-8 text-sm font-mono uppercase tracking-widest text-zinc-500">
-          <a href={BRAND.socials.github} className="hover:text-zinc-100 transition-colors">GitHub</a>
-          <a href={BRAND.socials.twitter} className="hover:text-zinc-100 transition-colors">X</a>
-          <a href={BRAND.socials.linkedin} className="hover:text-zinc-100 transition-colors">LinkedIn</a>
-          <a href={BRAND.socials.carrd} className="hover:text-zinc-100 transition-colors">Carrd</a>
+        <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-zinc-600 text-xs font-mono">
+            © {new Date().getFullYear()} {BRAND.name.toUpperCase()} — ALL RIGHTS RESERVED.
+          </p>
+          
+          <button 
+            onClick={scrollToTop}
+            className="group flex items-center gap-2 text-zinc-500 hover:text-zinc-100 transition-colors text-xs font-mono uppercase tracking-widest"
+          >
+            Back to top
+            <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform" />
+          </button>
         </div>
       </div>
     </footer>

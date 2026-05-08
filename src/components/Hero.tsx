@@ -82,7 +82,7 @@ export const Hero = () => {
             {/* 🚀 DUAL CALL-TO-ACTION BUTTONS */}
             <motion.a
               href={BRAND.cta.primary.link}
-              target="_blank"
+              target={BRAND.cta.primary.link.startsWith('#') ? undefined : "_blank"}
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -95,7 +95,7 @@ export const Hero = () => {
 
             <motion.a
               href={BRAND.cta.secondary.link}
-              target="_blank"
+              target={BRAND.cta.secondary.link.startsWith('#') ? undefined : "_blank"}
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -103,14 +103,14 @@ export const Hero = () => {
               aria-label={BRAND.cta.secondary.label}
             >
               {BRAND.cta.secondary.label}
-              <Linkedin className="w-4 h-4" />
+              <Mail className="w-4 h-4" />
             </motion.a>
 
             <div className="flex gap-4 mt-4 sm:mt-0">
               <SocialIcon href={BRAND.socials.github} icon={<Github />} label="GitHub Profile" />
               <SocialIcon href={BRAND.socials.twitter} icon={<Twitter />} label="Twitter Profile" />
+              <SocialIcon href={BRAND.socials.linkedin} icon={<Linkedin />} label="LinkedIn Profile" />
               <SocialIcon href={BRAND.socials.carrd} icon={<Globe />} label="Link Hub (Carrd)" />
-              <SocialIcon href={BRAND.socials.email} icon={<Mail />} label="Send Email" />
             </div>
           </div>
         </motion.div>

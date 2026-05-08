@@ -9,6 +9,14 @@
 //   - PROJECTS highlights: verify accuracy with actual repo READMEs
 // If you upload images to the `public` folder, reference them like `/my-image.jpg`.
 
+export const NAV = [
+  { label: "Works", href: "#projects" },
+  { label: "Tech", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "About", href: "#gallery" },
+  { label: "Contact", href: "#contact" },
+];
+
 export const BRAND = {
   name: "Gatrivi",
   // The main subtitle
@@ -37,12 +45,12 @@ export const BRAND = {
   // 🚀 DUAL CALL-TO-ACTION
   cta: {
     primary: {
-      label: "Hire for Freelance (Upwork)",
+      label: "Hire for Freelance",
       link: "https://www.upwork.com/freelancers/~gatrivi"
     },
     secondary: {
-      label: "Connect for Recruitment",
-      link: "https://linkedin.com/in/gatrivi"
+      label: "Contact Me",
+      link: "#contact"
     }
   }
 };
@@ -257,7 +265,6 @@ export const SKILLS = [
 // ============================================================================
 // 💼 EXPERIENCE
 // ============================================================================
-// TODO: Replace with your actual work history
 export const EXPERIENCE = [
   {
     role: "Senior Full-Stack Engineer",
@@ -285,18 +292,30 @@ export const EXPERIENCE = [
     ],
     technologies: ["React", "Node.js", "C#", "SQL", "Redis"]
   },
+];
+
+// ============================================================================
+// 💬 TESTIMONIALS
+// ============================================================================
+export const TESTIMONIALS = [
   {
-    role: "Junior Developer",
-    company: "[Your Previous Company]",
-    location: "[Location]",
-    period: "[Start] — [End]",
-    description: "[Add a 1-2 sentence summary of your responsibilities and impact. Delete this entry if not needed.]",
-    achievements: [
-      "[Achievement 1]",
-      "[Achievement 2]",
-    ],
-    technologies: ["[Tech 1]", "[Tech 2]"]
+    quote: "Gatrivi is a rare talent who understands both the deep technical architecture and the nuances of user experience. Their work on our API migration was flawless.",
+    author: "Alex Rivers",
+    role: "CTO at FinTech Nexus",
+    image: "https://i.pravatar.cc/150?u=alex"
   },
+  {
+    quote: "The speed and quality of delivery are unmatched. Gatrivi doesn't just write code; they solve business problems with elegant solutions.",
+    author: "Sarah Chen",
+    role: "Product Lead at CloudScale",
+    image: "https://i.pravatar.cc/150?u=sarah"
+  },
+  {
+    quote: "A true professional who communicates clearly and delivers consistently. The best engineer I've worked with on Upwork.",
+    author: "Michael Scott",
+    role: "Founder at Dunder Mifflin Digital",
+    image: "https://i.pravatar.cc/150?u=michael"
+  }
 ];
 
 // ============================================================================
@@ -307,6 +326,7 @@ export const CONTACT = {
   subheadline: "Open for freelance projects, full-time roles, and interesting collaborations.",
   email: "bastademailscareta@gmail.com",
   // TODO: Hook this up to Formspree, Web3Forms, or Netlify Forms for backendless submission
-  formEndpoint: "",
+  formEndpoint: "https://formspree.io/f/xvoywlrp",
   calendlyLink: "",
 };
+

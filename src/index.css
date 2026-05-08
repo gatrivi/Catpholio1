@@ -7,6 +7,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-zinc-950 text-zinc-50 antialiased selection:bg-zinc-800 selection:text-zinc-100;
   }
