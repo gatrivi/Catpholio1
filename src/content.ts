@@ -39,7 +39,7 @@ export const BRAND = {
     linkedin: "https://linkedin.com/in/gatrivi",
     carrd: "https://gatrivi.carrd.co/",
     upwork: "https://www.upwork.com/freelancers/~gatrivi",
-    email: "mailto:bastademailscareta@gmail.com"
+    email: "mailto:devtrivi@zengasoft.com"
   },
   // cv: "https://gatrivi.com/cv.pdf" // TODO: add updated CV link
 
@@ -167,12 +167,64 @@ export const PROJECTS = [
     title: 'Challenge Zero',
     description: 'A high-performance .NET Minimal API implementation showcasing advanced architectural patterns and clean code principles.',
     link: 'https://github.com/gatrivi/challenge-zero',
-    image: "/will.jpg",
+    image: "/will.jpg", // TODO: Update if specific thumbnail exists
     tags: ['.NET 8', 'Minimal API', 'Clean Architecture', 'Redis'],
     highlights: [
       'Implemented vertical slice architecture with CQRS patterns',
       'Achieved <50ms p99 response times under load testing',
       'Integrated Redis caching layer reducing DB load by 60%'
+    ]
+  },
+  {
+    title: 'TMM Store Dashboard',
+    description: 'Comprehensive e-commerce management dashboard with real-time analytics and inventory tracking for specialized retail.',
+    link: '#',
+    repo: 'https://github.com/gatrivi', // Placeholder
+    image: "/tmm-store-dashboard.jpg",
+    tags: ['React', 'Dashboard', 'Analytics'],
+    highlights: [
+      'Designed real-time inventory management system',
+      'Implemented custom charting for sales trends',
+      'Built responsive administrative UI with tailwind'
+    ]
+  },
+  {
+    title: 'TrufApp',
+    description: 'Specialized application for truffle hunters and enthusiasts, featuring geolocation and collection tracking.',
+    link: '#',
+    repo: 'https://github.com/gatrivi/trufapp', // Likely name
+    image: "/trufapp.png",
+    tags: ['Mobile', 'Geolocation', 'React Native'],
+    highlights: [
+      'Integrated Google Maps API for precise location marking',
+      'Developed offline-first data persistence',
+      'Built community-driven data sharing features'
+    ]
+  },
+  {
+    title: 'Rosario Architecture',
+    description: 'A deep dive into responsive typography and component-driven design systems for modern web experiences.',
+    link: 'https://rosario.gatrivi.com',
+    repo: 'https://github.com/gatrivi/Rosario-cards-v1',
+    image: "/rosario1.png",
+    tags: ['Design Systems', 'Typography', 'Frontend'],
+    highlights: [
+      'Created scalable CSS architecture using design tokens',
+      'Implemented fluid typography system across breakpoints',
+      'Built accessible component library with WCAG 2.1 compliance'
+    ]
+  },
+  {
+    title: 'Cat Reader',
+    description: 'A focused reading companion designed for distraction-free consumption of long-form content and digital literature.',
+    link: 'https://catreader.gatrivi.com',
+    repo: 'https://github.com/gatrivi/catreader',
+    image: "/catreader1.png",
+    tags: ['TypeScript', 'Reading', 'Productivity'],
+    highlights: [
+      'Engineered smooth scroll and progress persistence',
+      'Built customizable typography and theme engine',
+      'Implemented EPUB parsing pipeline in the browser'
     ]
   },
   {
@@ -186,71 +238,6 @@ export const PROJECTS = [
       'Built persistent audio scheduling system for liturgical hours',
       'Designed distraction-free UI optimized for long-session usage',
       'Implemented offline-first PWA architecture'
-    ]
-  },
-  {
-    title: 'Cat Int Assist',
-    description: 'Intelligent assistance and task management tailored for daily workflows, integrating LLMs with structured task tracking.',
-    link: 'https://catintassist.gatrivi.com',
-    repo: 'https://github.com/gatrivi/catintassist',
-    image: "/20180222_215332.jpg",
-    tags: ['AI', 'Productivity', 'Assistant'],
-    highlights: [
-      'Integrated OpenAI API with structured output parsing',
-      'Built context-aware prompt chaining for task decomposition',
-      'Designed real-time sync architecture for multi-device usage'
-    ]
-  },
-  {
-    title: 'Rosario Architecture',
-    description: 'A deep dive into responsive typography and component-driven design systems for modern web experiences.',
-    link: 'https://rosario.gatrivi.com',
-    repo: 'https://github.com/gatrivi/Rosario-cards-v1',
-    image: "/20190615_161902.jpg",
-    tags: ['Design Systems', 'Typography', 'Frontend'],
-    highlights: [
-      'Created scalable CSS architecture using design tokens',
-      'Implemented fluid typography system across breakpoints',
-      'Built accessible component library with WCAG 2.1 compliance'
-    ]
-  },
-  {
-    title: 'Cat Reader',
-    description: 'A focused reading companion designed for distraction-free consumption of long-form content and digital literature.',
-    link: 'https://catreader.gatrivi.com',
-    repo: 'https://github.com/gatrivi/catreader',
-    image: "/20140329_113242.jpg",
-    tags: ['TypeScript', 'Reading', 'Productivity'],
-    highlights: [
-      'Engineered smooth scroll and progress persistence',
-      'Built customizable typography and theme engine',
-      'Implemented EPUB parsing pipeline in the browser'
-    ]
-  },
-  {
-    title: 'Cat Threader',
-    description: 'A utility for composing Twitter/X threads without manual paragraph splitting or stitching — and no lost work if the platform goes down.',
-    link: 'https://catthreader.gatrivi.com',
-    repo: 'https://github.com/gatrivi/catthreader',
-    image: "/EOS Rebel 002-001.jpg",
-    tags: ['TypeScript', 'Social', 'Productivity'],
-    highlights: [
-      'Built smart paragraph-to-tweet splitting algorithm',
-      'Designed auto-save and local draft recovery system',
-      'Implemented one-click publishing to X API'
-    ]
-  },
-  {
-    title: 'Cat Booklet Induction',
-    description: 'A streamlined tool for generating booklet-style induction documents and printable guides from structured content.',
-    link: 'https://catbookletinduction.gatrivi.com',
-    repo: 'https://github.com/gatrivi/catbookletinduction',
-    image: "/20140319_231227.jpg",
-    tags: ['TypeScript', 'PDF', 'Tool'],
-    highlights: [
-      'Built PDF generation engine with precise print layout control',
-      'Designed WYSIWYG editor for non-technical users',
-      'Implemented template system for reusable document formats'
     ]
   },
 ];
@@ -431,7 +418,7 @@ export const TESTIMONIALS = [
 export const CONTACT = {
   headline: "Let's build something together.",
   subheadline: "Open for freelance projects, full-time roles, and interesting collaborations.",
-  email: "bastademailscareta@gmail.com",
+  email: "devtrivi@zengasoft.com",
   // TODO: Hook this up to Formspree, Web3Forms, or Netlify Forms for backendless submission
   formEndpoint: "https://formspree.io/f/xvoywlrp",
   calendlyLink: "",
