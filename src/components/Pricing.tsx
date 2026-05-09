@@ -1,15 +1,76 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, ArrowRight } from 'lucide-react';
-import { PRICING, SECTIONS, BRAND } from '../content';
+import { Check, ArrowRight, Globe } from 'lucide-react';
+import { PRICING, SECTIONS, BRAND, REGIONAL_OFFERS } from '../content';
 
 export const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
+  const [isArgentina, setIsArgentina] = useState(false);
+  const [loadingGeo, setLoadingGeo] = useState(true);
+
+  useEffect(() => {
+    // Simple geolocation check using a free API
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code === 'AR') {
+          setIsArgentina(true);
+        }
+      })
+      .catch(err => console.error('Geo detection failed:', err))
+      .finally(() => setLoadingGeo(false));
+  }, []);
+
   const currentPlans = PRICING[billingCycle];
+
+  const calculatePrice = (basePrice: string) => {
+    if (basePrice === 'Custom') return basePrice;
+    
+    let price = parseInt(basePrice.replace(',', ''));
+    
+    // Apply Argentina discount OR Launch discount
+    if (isArgentina) {
+      price = price * (1 - REGIONAL_OFFERS.argentina.discount / 100);
+    } else {
+      price = price * (1 - REGIONAL_OFFERS.launch.discount / 100);
+    }
+    
+    return Math.round(price).toLocaleString();
+  };
 
   return (
     <section id="pricing" className="px-6 md:px-12 lg:px-24 py-32 bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto">
+        {/* Banner de Oferta */}
+        {!loadingGeo && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-12 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex flex-col sm:flex-row items-center justify-center gap-4 text-center"
+          >
+            {isArgentina ? (
+              <>
+                <span className="text-2xl">{REGIONAL_OFFERS.argentina.flag}</span>
+                <p className="text-zinc-100 font-bold">
+                  {REGIONAL_OFFERS.argentina.message} <span className="text-zinc-500 font-mono ml-2">[{REGIONAL_OFFERS.argentina.label}]</span>
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="p-2 rounded-lg bg-zinc-100 text-zinc-950">
+                  <Globe size={20} />
+                </div>
+                <p className="text-zinc-100 font-bold">
+                  {REGIONAL_OFFERS.launch.message}
+                </p>
+                <div className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs border border-emerald-500/20 font-mono">
+                  {REGIONAL_OFFERS.launch.remainingReviews} reviews left
+                </div>
+              </>
+            )}
+          </motion.div>
+        )}
+
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">
@@ -75,7 +136,7 @@ export const Pricing = () => {
                   </h3>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl md:text-5xl font-bold text-zinc-100">
-                      {plan.price !== 'Custom' && '$'}{plan.price}
+                      {plan.price !== 'Custom' && '$'}{calculatePrice(plan.price)}
                     </span>
                     {plan.price !== 'Custom' && (
                       <span className="text-zinc-500 text-sm font-mono">
@@ -83,6 +144,11 @@ export const Pricing = () => {
                       </span>
                     )}
                   </div>
+                  {plan.price !== 'Custom' && (
+                    <p className="text-xs text-zinc-500 line-through mt-1">
+                      Was ${plan.price}
+                    </p>
+                  )}
                   <p className="mt-4 text-zinc-400 text-sm leading-relaxed">
                     {plan.description}
                   </p>

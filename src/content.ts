@@ -93,6 +93,20 @@ export const SECTIONS = {
   }
 };
 
+export const REGIONAL_OFFERS = {
+  argentina: {
+    flag: "🇦🇷",
+    discount: 30, // 30% discount
+    message: "Promo especial para Argentina: -30% OFF",
+    label: "SPA ARG Context"
+  },
+  launch: {
+    message: "Special Launch Price: Get 50% OFF for the first 5 clients!",
+    discount: 50,
+    remainingReviews: 5
+  }
+};
+
 export const PRICING = {
   monthly: [
     {
