@@ -1,15 +1,15 @@
 import { motion } from 'motion/react';
 import { Quote } from 'lucide-react';
-import { TESTIMONIALS } from '../content';
+import { TESTIMONIALS, SECTIONS } from '../content';
 
 export const Testimonials = () => {
   return (
     <section id="testimonials" className="px-6 md:px-12 lg:px-24 py-32 bg-zinc-900 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16 text-center lg:text-left">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">Kind Words</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">{SECTIONS.testimonials.title}</h2>
           <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest">
-            05 — Client Testimonials
+            {SECTIONS.testimonials.subtitle}
           </p>
         </div>
 

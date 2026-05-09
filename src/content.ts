@@ -11,6 +11,7 @@
 
 export const NAV = [
   { label: "Works", href: "#projects" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Tech", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "About", href: "#gallery" },
@@ -53,6 +54,98 @@ export const BRAND = {
       link: "#contact"
     }
   }
+};
+
+// ============================================================================
+// 🏢 SECTION CONFIGURATION
+// ============================================================================
+// Change these to pivot between a personal portfolio and a business landing.
+export const SECTIONS = {
+  projects: {
+    title: "Selected Works",
+    subtitle: "01 — Portfolio",
+    description: "A showcase of technical architecture and product delivery."
+  },
+  skills: {
+    title: "Tech Stack",
+    subtitle: "02 — Expertise",
+  },
+  experience: {
+    title: "Experience",
+    subtitle: "03 — History",
+  },
+  gallery: {
+    title: "Behind the Scenes",
+    subtitle: "04 — Culture",
+  },
+  testimonials: {
+    title: "Testimonials",
+    subtitle: "05 — Trust",
+  },
+  contact: {
+    title: "Let's build something together.",
+    subtitle: "06 — Contact",
+  },
+  pricing: {
+    title: "Pricing Plans",
+    subtitle: "Flexible Options",
+    description: "Choose the perfect plan for your business needs."
+  }
+};
+
+export const PRICING = {
+  monthly: [
+    {
+      name: "Starter",
+      price: "499",
+      description: "Perfect for small projects and MVPs.",
+      features: ["Single Page App", "Basic SEO", "Contact Form", "1 Month Support"],
+      cta: "Get Started",
+      popular: false
+    },
+    {
+      name: "Professional",
+      price: "1,499",
+      description: "Advanced solutions for growing businesses.",
+      features: ["Full Web Application", "Advanced CMS", "API Integration", "3 Months Support", "Performance Audit"],
+      cta: "Hire Now",
+      popular: true
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      description: "Tailored architecture for scale.",
+      features: ["Custom Architecture", "Dedicated Infrastructure", "24/7 Priority Support", "White-label Solution"],
+      cta: "Contact Us",
+      popular: false
+    }
+  ],
+  annual: [
+    {
+      name: "Starter",
+      price: "4,990",
+      description: "Perfect for small projects and MVPs.",
+      features: ["Single Page App", "Basic SEO", "Contact Form", "1 Year Support"],
+      cta: "Get Started",
+      popular: false
+    },
+    {
+      name: "Professional",
+      price: "14,990",
+      description: "Advanced solutions for growing businesses.",
+      features: ["Full Web Application", "Advanced CMS", "API Integration", "1 Year Support", "Performance Audit"],
+      cta: "Hire Now",
+      popular: true
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      description: "Tailored architecture for scale.",
+      features: ["Custom Architecture", "Dedicated Infrastructure", "24/7 Priority Support", "White-label Solution"],
+      cta: "Contact Us",
+      popular: false
+    }
+  ]
 };
 
 export const PROJECTS = [
@@ -329,4 +422,3 @@ export const CONTACT = {
   formEndpoint: "https://formspree.io/f/xvoywlrp",
   calendlyLink: "",
 };
-

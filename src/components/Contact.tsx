@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Send, ArrowUpRight, Loader2, AlertCircle } from 'lucide-react';
-import { CONTACT, BRAND } from '../content';
+import { CONTACT, BRAND, SECTIONS } from '../content';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -51,10 +51,10 @@ export const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">
-              {CONTACT.headline}
+              {SECTIONS.contact.title}
             </h2>
             <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-10">
-              06 — Get In Touch
+              {SECTIONS.contact.subtitle}
             </p>
             <p className="text-zinc-400 text-lg leading-relaxed mb-10 max-w-md">
               {CONTACT.subheadline}

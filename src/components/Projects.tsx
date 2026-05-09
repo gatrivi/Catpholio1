@@ -1,15 +1,15 @@
 import { motion } from 'motion/react';
 import { ExternalLink, Github } from 'lucide-react';
-import { PROJECTS } from '../content';
+import { PROJECTS, SECTIONS } from '../content';
 
 export const Projects = () => {
   return (
     <section id="projects" className="px-6 md:px-12 lg:px-24 py-32 bg-zinc-900 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">Selected Works</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">{SECTIONS.projects.title}</h2>
           <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest">
-            01 — Portfolio
+            {SECTIONS.projects.subtitle}
           </p>
         </div>
 

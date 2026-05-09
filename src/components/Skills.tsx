@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Code2, Layers, Server, Database, Wrench, BrainCircuit } from 'lucide-react';
-import { SKILLS } from '../content';
+import { SKILLS, SECTIONS } from '../content';
 
 import type { ReactNode } from 'react';
 
@@ -24,9 +24,9 @@ export const Skills = () => {
     <section id="skills" className="px-6 md:px-12 lg:px-24 py-32 bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">Tech Stack</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">{SECTIONS.skills.title}</h2>
           <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest">
-            02 — Tools & Technologies
+            {SECTIONS.skills.subtitle}
           </p>
         </div>
 

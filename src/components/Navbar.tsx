@@ -44,12 +44,12 @@ export const Navbar = () => {
               </a>
             ))}
             <a
-              href={BRAND.socials.upwork}
-              target="_blank"
+              href={BRAND.cta.primary.link}
+              target={BRAND.cta.primary.link.startsWith('#') ? undefined : "_blank"}
               rel="noopener noreferrer"
               className="px-4 py-2 bg-zinc-100 text-zinc-950 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-white transition-colors"
             >
-              Hire Me
+              {BRAND.cta.primary.label}
               <ArrowUpRight size={14} />
             </a>
           </div>
@@ -100,12 +100,12 @@ export const Navbar = () => {
 
             <div className="mt-auto pt-12 border-t border-zinc-800">
               <a
-                href={BRAND.socials.upwork}
-                target="_blank"
+                href={BRAND.cta.primary.link}
+                target={BRAND.cta.primary.link.startsWith('#') ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 className="w-full py-4 bg-zinc-100 text-zinc-950 rounded-xl text-center font-bold flex items-center justify-center gap-2"
               >
-                Hire Me on Upwork
+                {BRAND.cta.primary.label}
                 <ArrowUpRight size={18} />
               </a>
             </div>

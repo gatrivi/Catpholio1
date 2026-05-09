@@ -9,6 +9,7 @@ import { Hero } from './components/Hero';
 import { Skills } from './components/Skills';
 import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
+import { Pricing } from './components/Pricing';
 import { Gallery } from './components/Gallery';
 import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
@@ -28,6 +29,7 @@ export default function App() {
         <Skills />
         <Experience />
         <Projects />
+        <Pricing />
         <Gallery />
         <Testimonials />
         <Contact />

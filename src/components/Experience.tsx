@@ -1,15 +1,15 @@
 import { motion } from 'motion/react';
 import { MapPin, Calendar, ArrowUpRight } from 'lucide-react';
-import { EXPERIENCE, BRAND } from '../content';
+import { EXPERIENCE, BRAND, SECTIONS } from '../content';
 
 export const Experience = () => {
   return (
     <section id="experience" className="px-6 md:px-12 lg:px-24 py-32 bg-zinc-900 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">Experience</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">{SECTIONS.experience.title}</h2>
           <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest">
-            03 — Work History
+            {SECTIONS.experience.subtitle}
           </p>
         </div>
 

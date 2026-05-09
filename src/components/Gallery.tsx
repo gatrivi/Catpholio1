@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
-import { GALLERY } from '../content';
+import { GALLERY, SECTIONS } from '../content';
 
 export const Gallery = () => {
   return (
     <section id="gallery" className="px-6 md:px-12 lg:px-24 py-32 bg-zinc-950 border-t border-zinc-800">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">Visual Journal</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-100">{SECTIONS.gallery.title}</h2>
           <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest">
-            04 — Moments & Inspiration
+            {SECTIONS.gallery.subtitle}
           </p>
         </div>
 
