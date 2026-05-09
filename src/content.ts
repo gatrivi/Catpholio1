@@ -164,10 +164,37 @@ export const PRICING = {
 
 export const PROJECTS = [
   {
+    title: 'TMM Store Dashboard',
+    description: 'A comprehensive retail management dashboard featuring real-time analytics, inventory tracking, and specialized retail workflows.',
+    link: 'https://devtrivi.gatrivi.com', 
+    repo: 'https://github.com/devtrivi',
+    image: "/tmm-store-dashboard.jpg",
+    tags: ['React', 'Dashboard', 'Tailwind CSS', 'Context API'],
+    highlights: [
+      'Built a robust real-time inventory management system',
+      'Implemented complex data visualization for sales trends',
+      'Architected a scalable state management solution using Context API'
+    ]
+  },
+  {
+    title: 'TrufApp',
+    description: 'A specialized geolocation application designed for field data collection, featuring offline-first capabilities and precise mapping.',
+    link: 'https://devtrivi.gatrivi.com',
+    repo: 'https://github.com/devtrivi',
+    image: "/trufapp.png",
+    tags: ['React Native', 'Geolocation', 'Offline-First'],
+    highlights: [
+      'Integrated precise GPS tracking for field operations',
+      'Developed a resilient offline data synchronization engine',
+      'Designed an intuitive UI for rapid data entry'
+    ]
+  },
+  {
     title: 'Challenge Zero',
     description: 'A high-performance .NET Minimal API implementation showcasing advanced architectural patterns and clean code principles.',
-    link: 'https://github.com/gatrivi/challenge-zero',
-    image: "/will.jpg", // TODO: Update if specific thumbnail exists
+    link: 'https://github.com/devtrivi/challenge-zero',
+    repo: 'https://github.com/devtrivi/challenge-zero',
+    image: "/will.jpg",
     tags: ['.NET 8', 'Minimal API', 'Clean Architecture', 'Redis'],
     highlights: [
       'Implemented vertical slice architecture with CQRS patterns',
@@ -176,49 +203,10 @@ export const PROJECTS = [
     ]
   },
   {
-    title: 'TMM Store Dashboard',
-    description: 'Comprehensive e-commerce management dashboard with real-time analytics and inventory tracking for specialized retail.',
-    link: '#',
-    repo: 'https://github.com/gatrivi', // Placeholder
-    image: "/tmm-store-dashboard.jpg",
-    tags: ['React', 'Dashboard', 'Analytics'],
-    highlights: [
-      'Designed real-time inventory management system',
-      'Implemented custom charting for sales trends',
-      'Built responsive administrative UI with tailwind'
-    ]
-  },
-  {
-    title: 'TrufApp',
-    description: 'Specialized application for truffle hunters and enthusiasts, featuring geolocation and collection tracking.',
-    link: '#',
-    repo: 'https://github.com/gatrivi/trufapp', // Likely name
-    image: "/trufapp.png",
-    tags: ['Mobile', 'Geolocation', 'React Native'],
-    highlights: [
-      'Integrated Google Maps API for precise location marking',
-      'Developed offline-first data persistence',
-      'Built community-driven data sharing features'
-    ]
-  },
-  {
-    title: 'Rosario Architecture',
-    description: 'A deep dive into responsive typography and component-driven design systems for modern web experiences.',
-    link: 'https://rosario.gatrivi.com',
-    repo: 'https://github.com/gatrivi/Rosario-cards-v1',
-    image: "/rosario1.png",
-    tags: ['Design Systems', 'Typography', 'Frontend'],
-    highlights: [
-      'Created scalable CSS architecture using design tokens',
-      'Implemented fluid typography system across breakpoints',
-      'Built accessible component library with WCAG 2.1 compliance'
-    ]
-  },
-  {
     title: 'Cat Reader',
     description: 'A focused reading companion designed for distraction-free consumption of long-form content and digital literature.',
     link: 'https://catreader.gatrivi.com',
-    repo: 'https://github.com/gatrivi/catreader',
+    repo: 'https://github.com/devtrivi/catreader',
     image: "/catreader1.png",
     tags: ['TypeScript', 'Reading', 'Productivity'],
     highlights: [
@@ -228,10 +216,23 @@ export const PROJECTS = [
     ]
   },
   {
+    title: 'Rosario Architecture',
+    description: 'A deep dive into responsive typography and component-driven design systems for modern web experiences.',
+    link: 'https://rosario.gatrivi.com',
+    repo: 'https://github.com/devtrivi/Rosario-cards-v1',
+    image: "/rosario1.png",
+    tags: ['Design Systems', 'Typography', 'Frontend'],
+    highlights: [
+      'Created scalable CSS architecture using design tokens',
+      'Implemented fluid typography system across breakpoints',
+      'Built accessible component library with WCAG 2.1 compliance'
+    ]
+  },
+  {
     title: 'Cathedral',
     description: 'An ambient spiritual companion that keeps the Divine Office and liturgy close at hand, bringing monastic rhythm into daily life.',
     link: 'https://cathedral.gatrivi.com',
-    repo: 'https://github.com/gatrivi/cathedral',
+    repo: 'https://github.com/devtrivi/cathedral',
     image: "/zen.jpg",
     tags: ['TypeScript', 'Spiritual', 'Lifestyle'],
     highlights: [
