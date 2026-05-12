@@ -1,4 +1,4 @@
-import { BRAND, NAV } from '../content';
+import { BRAND, NAV, VERSION } from '../content';
 import { ArrowUp } from 'lucide-react';
 
 export const Footer = () => {
@@ -55,9 +55,14 @@ export const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-zinc-600 text-xs font-mono">
-            © {new Date().getFullYear()} {BRAND.name.toUpperCase()} — ALL RIGHTS RESERVED.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+            <p className="text-zinc-600 text-xs font-mono">
+              © {new Date().getFullYear()} {BRAND.name.toUpperCase()} — ALL RIGHTS RESERVED.
+            </p>
+            <span className="text-zinc-700 text-[10px] font-mono px-2 py-0.5 border border-zinc-800 rounded-full">
+              v{VERSION}
+            </span>
+          </div>
           
           <button 
             onClick={scrollToTop}

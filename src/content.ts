@@ -2,6 +2,7 @@
 // 🎨 YOUR BRAND & CONTENT CONFIGURATION
 // ============================================================================
 // AGENT NOTE: This is the single source of truth. All site text lives here.
+export const VERSION = "1.0.0";
 // TODOs for next session:
 //   - EXPERIENCE: replace placeholder entries with real work history
 //   - CONTACT.formEndpoint: wire up Formspree/Web3Forms if you want real form submission
@@ -194,7 +195,7 @@ export const PROJECTS = [
     description: 'A high-performance .NET Minimal API implementation showcasing advanced architectural patterns and clean code principles.',
     link: 'https://github.com/devtrivi/challenge-zero',
     repo: 'https://github.com/devtrivi/challenge-zero',
-    image: "/will.jpg",
+    image: "/20190615_161902.jpg",
     tags: ['.NET 8', 'Minimal API', 'Clean Architecture', 'Redis'],
     highlights: [
       'Implemented vertical slice architecture with CQRS patterns',
@@ -233,7 +234,7 @@ export const PROJECTS = [
     description: 'An ambient spiritual companion that keeps the Divine Office and liturgy close at hand, bringing monastic rhythm into daily life.',
     link: 'https://cathedral.gatrivi.com',
     repo: 'https://github.com/devtrivi/cathedral',
-    image: "/zen.jpg",
+    image: "/gat_20161016_151754.jpg",
     tags: ['TypeScript', 'Spiritual', 'Lifestyle'],
     highlights: [
       'Built persistent audio scheduling system for liturgical hours',
@@ -262,8 +263,8 @@ export const GALLERY = [
     span: 'col-span-1' 
   },
   { 
-    src: '/20190615_161902.jpg', 
-    alt: 'System Architecture Diagram', // Artifact focus
+    src: '/20190615_161910.jpg', 
+    alt: 'System Architecture Detail', // Changed from 161902 to 161910
     span: 'md:col-span-2' 
   },
   { 
@@ -288,12 +289,12 @@ export const GALLERY = [
   },
   { 
     src: '/gat_20161015_172042.jpg', 
-    alt: 'Personal photo', 
+    alt: 'Gatrivi Photography', 
     span: 'col-span-1' 
   },
   { 
     src: '/self.jpg', 
-    alt: 'Code Review Artifact', // Artifact focus
+    alt: 'Code Review Artifact', 
     span: 'md:col-span-3' 
   },
 ];
