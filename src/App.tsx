@@ -3,21 +3,42 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { Skills } from './components/Skills';
-import { Experience } from './components/Experience';
-import { Projects } from './components/Projects';
-import { Pricing } from './components/Pricing';
-import { Gallery } from './components/Gallery';
-import { Testimonials } from './components/Testimonials';
-import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { Portfolio } from './pages/Portfolio';
+import { AppStore } from './pages/AppStore';
+import { DigitalMenu } from './pages/DigitalMenu';
+import { useEffect } from 'react';
+
+// Scroll to top on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/store" element={<AppStore />} />
+        <Route path="/store/digital-menu" element={<DigitalMenu />} />
+      </Routes>
+    </AnimatePresence>
+  );
+};
 
 export default function App() {
   return (
-    <AnimatePresence>
+    <Router>
+      <ScrollToTop />
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -25,16 +46,11 @@ export default function App() {
         className="min-h-screen flex flex-col bg-zinc-950 text-zinc-50 font-sans selection:bg-zinc-800 selection:text-zinc-100 scroll-smooth"
       >
         <Navbar />
-        <Hero />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Pricing />
-        <Gallery />
-        <Testimonials />
-        <Contact />
+        <div className="flex-grow">
+          <AnimatedRoutes />
+        </div>
         <Footer />
       </motion.main>
-    </AnimatePresence>
+    </Router>
   );
 }

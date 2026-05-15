@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { NAV, BRAND } from '../content';
+import { Link, useLocation } from 'react-router-dom';
+import { MAIN_NAV, PORTFOLIO_CONTENT, DIGITAL_MENU_CONTENT } from '../content';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +16,10 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isDigitalMenu = location.pathname === '/store/digital-menu';
+  const navLinks = isDigitalMenu ? DIGITAL_MENU_CONTENT.NAV : MAIN_NAV;
+  const brandName = isDigitalMenu ? DIGITAL_MENU_CONTENT.BRAND.name : PORTFOLIO_CONTENT.BRAND.name;
 
   return (
     <>
@@ -25,33 +31,46 @@ export const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="#" className="text-xl font-bold tracking-tighter text-zinc-100 flex items-center gap-2">
+          <Link to="/" className="text-xl font-bold tracking-tighter text-zinc-100 flex items-center gap-2">
             <span className="w-8 h-8 bg-zinc-100 text-zinc-950 flex items-center justify-center rounded-lg font-black text-sm">
               G
             </span>
-            {BRAND.name}
-          </a>
+            {brandName}
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {NAV.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
-              >
-                {link.label}
-              </a>
+            {navLinks.map((link) => (
+              link.href.startsWith('#') ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm font-medium text-zinc-400 hover:text-zinc-100 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className={`text-sm font-medium transition-colors ${
+                    location.pathname === link.href ? 'text-zinc-100' : 'text-zinc-400 hover:text-zinc-100'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
-            <a
-              href={BRAND.cta.primary.link}
-              target={BRAND.cta.primary.link.startsWith('#') ? undefined : "_blank"}
-              rel="noopener noreferrer"
-              className="px-4 py-2 bg-zinc-100 text-zinc-950 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-white transition-colors"
-            >
-              {BRAND.cta.primary.label}
-              <ArrowUpRight size={14} />
-            </a>
+            
+            {isDigitalMenu && (
+              <a
+                href={DIGITAL_MENU_CONTENT.BRAND.cta.primary.link}
+                className="px-4 py-2 bg-zinc-100 text-zinc-950 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-white transition-colors"
+              >
+                {DIGITAL_MENU_CONTENT.BRAND.cta.primary.label}
+                <ArrowUpRight size={14} />
+              </a>
+            )}
           </div>
 
           {/* Mobile Toggle */}
@@ -75,7 +94,7 @@ export const Navbar = () => {
           >
             <div className="flex items-center justify-between mb-12">
               <span className="text-xl font-bold tracking-tighter text-zinc-100">
-                {BRAND.name}
+                {brandName}
               </span>
               <button
                 className="p-2 text-zinc-400 hover:text-zinc-100 transition-colors"
@@ -86,29 +105,40 @@ export const Navbar = () => {
             </div>
 
             <div className="flex flex-col gap-8">
-              {NAV.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-3xl font-bold text-zinc-100 hover:text-zinc-400 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
+              {navLinks.map((link) => (
+                link.href.startsWith('#') ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-3xl font-bold text-zinc-100 hover:text-zinc-400 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-3xl font-bold text-zinc-100 hover:text-zinc-400 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </div>
 
-            <div className="mt-auto pt-12 border-t border-zinc-800">
-              <a
-                href={BRAND.cta.primary.link}
-                target={BRAND.cta.primary.link.startsWith('#') ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className="w-full py-4 bg-zinc-100 text-zinc-950 rounded-xl text-center font-bold flex items-center justify-center gap-2"
-              >
-                {BRAND.cta.primary.label}
-                <ArrowUpRight size={18} />
-              </a>
-            </div>
+            {isDigitalMenu && (
+              <div className="mt-auto pt-12 border-t border-zinc-800">
+                <a
+                  href={DIGITAL_MENU_CONTENT.BRAND.cta.primary.link}
+                  className="w-full py-4 bg-zinc-100 text-zinc-950 rounded-xl text-center font-bold flex items-center justify-center gap-2"
+                >
+                  {DIGITAL_MENU_CONTENT.BRAND.cta.primary.label}
+                  <ArrowUpRight size={18} />
+                </a>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
