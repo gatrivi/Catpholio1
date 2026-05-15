@@ -1,77 +1,65 @@
 # Catpholio1 - Project Status Overview
 
 ## 🚀 Project Vision
-**Catpholio1** is a premium, high-performance portfolio website designed for **Gatrivi**. It blends a minimalist Brutalist aesthetic with cinematic animations and playful "easter eggs." The site is built to be "Configuration-First," making it extremely easy to update content without touching the core UI logic.
+**Catpholio1** is a premium, high-performance multi-view application designed for **Gatrivi**. It serves as a unified platform for a **Developer Portfolio** and an **App Store** for digital products (like "Carta Digital"). The site blends a minimalist Brutalist aesthetic with cinematic animations.
 
 ---
 
 ## 🛠️ Technology Stack
 - **Framework:** [React](https://reactjs.org/) (via [Vite](https://vitejs.dev/))
+- **Routing:** [React Router DOM](https://reactrouter.com/)
 - **Language:** TypeScript
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (Vanilla CSS approach with utility classes)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/) (motion/react)
 - **Icons:** [Lucide React](https://lucide.dev/)
-- **Architecture:** Component-based, centralized content configuration.
+- **Architecture:** Multi-view, Configuration-First (data-driven content).
 
 ---
 
-## 📦 Core Components & Features
+## 📦 Core Views
 
-### 1. **Hero Section** (`Hero.tsx`)
-- **Visuals:** Cinematic background image with a parallax scroll effect.
-- **Profile:** Circular profile picture with hover and click interactions.
-- **Dynamic Content:** Displays name, bio, and social links from `content.ts`.
-- **Easter Eggs:**
-    - Clicking the **Title** toggles between the professional title and a secret "Zen Master" title.
-    - Clicking the **Profile Picture** spawns running cat emojis (🐈) across the screen.
+### 1. **Developer Portfolio** (`/`)
+- **Hero:** Personal branding and social links.
+- **Projects:** Grid of featured work.
+- **Gallery:** Bento-style photo collection.
 
-### 2. **Projects Section** (`Projects.tsx`)
-- **Layout:** A grid of project cards.
-- **Details:** Each project features a thumbnail, title, description, and technology tags.
-- **Interactions:** Hover effects on cards and links to external project sites.
+### 2. **App Store** (`/store`)
+- **Listing:** Catalog of digital products and solutions.
+- **Cards:** Clean product previews with pricing and links.
 
-### 3. **Bento Gallery** (`Gallery.tsx`)
-- **Layout:** A responsive "Bento Box" grid of curated images.
-- **Dynamic Spans:** Images can occupy multiple columns or rows (defined in `content.ts`) for a modern, asymmetrical look.
-- **Visuals:** High-quality imagery from the user's personal collection.
-
-### 4. **Footer** (`Footer.tsx`)
-- **Design:** Clean, minimalist exit section with copyright information and secondary links.
+### 3. **Digital Menu Product Page** (`/store/digital-menu`)
+- **Product Landing:** Full feature set for the "Carta Digital" solution.
+- **Sections:** Pain Points, How It Works, Pricing, and Contact.
 
 ---
 
 ## 📄 File Structure
 ```text
 /
-├── index.html          # Entry HTML
 ├── src/
-│   ├── App.tsx         # Main Application wrapper & layout
-│   ├── content.ts      # SINGLE SOURCE OF TRUTH for all site data
-│   ├── main.tsx        # React mounting point
-│   ├── index.css       # Global styles and Tailwind imports
-│   ├── components/     # UI Building Blocks
-│   │   ├── Hero.tsx
-│   │   ├── Projects.tsx
-│   │   ├── Gallery.tsx
-│   │   └── Footer.tsx
-│   └── lib/
-│       └── utils.ts    # Class name merging utility (cn)
-├── public/             # Static assets (images, etc.)
-└── DOCUMENTATION.md    # Guide for future developers
+│   ├── App.tsx         # Routing & Global Layout
+│   ├── content.ts      # Main content exports
+│   ├── data/           # View-specific configuration files
+│   │   ├── portfolio.ts
+│   │   ├── app-store.ts
+│   │   └── digital-menu.ts
+│   ├── pages/          # View components
+│   │   ├── Portfolio.tsx
+│   │   ├── AppStore.tsx
+│   │   └── DigitalMenu.tsx
+│   ├── components/     # Shared & Product-specific UI Building Blocks
+│   └── lib/            # Utilities
+├── public/             # Static assets
+└── GEMINI.md           # System Instructions & Versioning
 ```
 
 ---
 
-## 🎨 Design System
-- **Colors:** Primary palette is `zinc` (Zinc-950 background, Zinc-50 text) for an "expensive" dark-mode feel.
-- **Typography:** Sans-serif with `tracking-tighter` on headings and `leading-relaxed` on body text.
-- **Aesthetics:** "Glassmorphism" touches, subtle radial gradients, and smooth transitions.
-
----
-
 ## ✅ Current State
-- [x] Base architecture established.
-- [x] All 4 main sections (Hero, Projects, Gallery, Footer) implemented.
-- [x] Centralized content management (`content.ts`) functional.
-- [x] Responsive design for Mobile, Tablet, and Desktop.
-- [x] Interactive elements and animations polished.
+- [x] Multi-view routing established.
+- [x] Developer Portfolio view implemented.
+- [x] App Store catalog implemented.
+- [x] Digital Menu landing page fully functional.
+- [x] Dynamic Navbar (context-aware navigation).
+- [x] Versioning (v2.0.0-multi) visible in UI.
+- [x] Vercel-ready build verified.
