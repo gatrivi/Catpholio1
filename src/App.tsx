@@ -23,14 +23,22 @@ const ScrollToTop = () => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Portfolio />} />
-        <Route path="/store" element={<AppStore />} />
-        <Route path="/store/digital-menu" element={<DigitalMenu />} />
-      </Routes>
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.25 }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Portfolio />} />
+          <Route path="/store" element={<AppStore />} />
+          <Route path="/store/digital-menu" element={<DigitalMenu />} />
+        </Routes>
+      </motion.div>
     </AnimatePresence>
   );
 };
@@ -39,18 +47,13 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="min-h-screen flex flex-col bg-zinc-950 text-zinc-50 font-sans selection:bg-zinc-800 selection:text-zinc-100 scroll-smooth"
-      >
+      <div className="min-h-screen flex flex-col bg-zinc-950 text-zinc-50 font-sans selection:bg-zinc-800 selection:text-zinc-100 scroll-smooth">
         <Navbar />
         <div className="flex-grow">
           <AnimatedRoutes />
         </div>
         <Footer />
-      </motion.main>
+      </div>
     </Router>
   );
 }

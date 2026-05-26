@@ -1,7 +1,7 @@
 {
-  "name": "gatrivi-pymes-castellano",
+  "name": "catpholio",
   "private": true,
-  "version": "1.1.0-pymes",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",

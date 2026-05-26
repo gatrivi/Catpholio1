@@ -8,7 +8,7 @@ import { Hero } from '../components/Hero';
 import { PainPoints } from '../components/PainPoints';
 import { HowItWorks } from '../components/HowItWorks';
 import { Pricing } from '../components/Pricing';
-import { Contact } from '../components/Contact';
+import { MenuContact } from '../components/MenuContact';
 import { WhatsAppFloat } from '../components/WhatsAppFloat';
 
 // Note: DigitalMenu page uses DIGITAL_MENU_CONTENT which is currently handled 
@@ -28,7 +28,7 @@ export const DigitalMenu = () => {
       <PainPoints />
       <HowItWorks />
       <Pricing />
-      <Contact />
+      <MenuContact />
       <WhatsAppFloat />
     </motion.div>
   );
