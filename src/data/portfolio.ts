@@ -11,6 +11,15 @@ export interface FeaturedProject {
   workflow?: string[];
   features?: string[];
   badges?: string[];
+  proof?: {
+    heading: string;
+    role: string;
+    status: string;
+    summary: string;
+    metrics: { label: string; value: string; detail: string }[];
+    evidence: { label: string; detail: string }[];
+    decisions: { label: string; detail: string }[];
+  };
 }
 
 export const BRAND = {
@@ -80,6 +89,66 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     liveUrl: '',
     image: '/catintassist.png',
     badges: ['Used in live clinical sessions', '16 interpreter-first features', 'Production-hardened'],
+    proof: {
+      heading: 'Flagship proof-of-work case study',
+      role: 'Solo developer, product owner, QA, and daily end user',
+      status: 'Production tool used in live medical interpreting sessions',
+      summary:
+        'CatIntAssist is the clearest evidence that I can identify a painful workflow, design the product around real constraints, build the interface, connect live AI services, and keep it stable while my own work depends on it.',
+      metrics: [
+        {
+          label: 'Ownership',
+          value: 'Solo-built',
+          detail: 'Product decisions, UI, data flow, integrations, deployments, and fixes handled end to end.',
+        },
+        {
+          label: 'Reality test',
+          value: 'Daily-use tool',
+          detail: 'Designed from actual interpreter pressure: speed, clarity, no tab juggling, no fragile flows.',
+        },
+        {
+          label: 'Feature depth',
+          value: '16+ workflows',
+          detail: 'Beyond a demo: timers, earnings, goals, holds, notes, phrase replay, and compliance helpers.',
+        },
+      ],
+      evidence: [
+        {
+          label: 'Repo trail',
+          detail: 'Public GitHub repository linked from the card so reviewers can inspect the code directly.',
+        },
+        {
+          label: 'Workflow receipts',
+          detail: 'The screenshot sequence follows the actual session loop from start button to month-end totals.',
+        },
+        {
+          label: 'Domain fit',
+          detail: 'The feature list reflects interpreter-specific edge cases that only show up through real use.',
+        },
+        {
+          label: 'Production pressure',
+          detail: 'The app has to stay useful during paid calls, so regressions are felt immediately and fixed fast.',
+        },
+      ],
+      decisions: [
+        {
+          label: 'Browser-tab capture',
+          detail: 'Start with the green button, select the call tab, and stream live audio into transcription.',
+        },
+        {
+          label: 'Parallel language lanes',
+          detail: 'English and Spanish stay visible at the same time to reduce context switching under pressure.',
+        },
+        {
+          label: 'Interpreter stays in control',
+          detail: 'AI provides suggested translation and terminology support; the human chooses what to say.',
+        },
+        {
+          label: 'Work economics in the UI',
+          detail: 'Timers, earnings, breaks, goals, and logoff totals make the app useful beyond transcription.',
+        },
+      ],
+    },
     workflow: [
       'Press the green button to start a session',
       'Select the browser tab where the medical call is running (or use YouTube to test)',

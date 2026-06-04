@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ChevronLeft, ChevronRight, Github, Check } from 'lucide-react';
+import { BadgeCheck, Check, ChevronLeft, ChevronRight, Code2, ExternalLink, Github, X } from 'lucide-react';
 import type { FeaturedProject } from '../data/portfolio';
 
 interface Props {
@@ -10,11 +10,11 @@ interface Props {
 
 export const ProjectGallery = ({ project, onClose }: Props) => {
   const [index, setIndex] = useState(0);
-  const [showFeatures, setShowFeatures] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     setIndex(0);
-    setShowFeatures(false);
+    setShowDetails(Boolean(project?.proof));
     if (project) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = '';
     return () => {
@@ -47,6 +47,150 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
 
   const current = project.screenshots[index];
   const hasFeatures = (project.features?.length ?? 0) > 0;
+  const hasProof = Boolean(project.proof);
+  const hasWorkflow = (project.workflow?.length ?? 0) > 0;
+  const hasDetails = hasProof || hasFeatures || hasWorkflow;
+
+  const detailsLabel = hasProof ? 'Builder Proof' : 'Features';
+
+  const renderDetailsPanel = () => (
+    <div className="space-y-6">
+      {project.proof && (
+        <section className="rounded-2xl border border-emerald-900/50 bg-emerald-950/10 p-4 ring-1 ring-emerald-500/10">
+          <div className="mb-4 flex items-start gap-3">
+            <span className="rounded-xl bg-emerald-500/10 p-2 text-emerald-300 ring-1 ring-emerald-500/20">
+              <BadgeCheck size={18} />
+            </span>
+            <div>
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-emerald-300">
+                {project.proof.heading}
+              </h3>
+              <p className="mt-1 text-sm font-medium text-zinc-100">{project.proof.role}</p>
+              <p className="mt-1 text-xs leading-relaxed text-zinc-400">{project.proof.status}</p>
+            </div>
+          </div>
+          <p className="text-sm leading-relaxed text-zinc-300">{project.proof.summary}</p>
+
+          <div className="mt-4 grid gap-3">
+            {project.proof.metrics.map((metric) => (
+              <div key={metric.label} className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-3">
+                <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+                  {metric.label}
+                </p>
+                <p className="mt-1 text-sm font-bold text-zinc-100">{metric.value}</p>
+                <p className="mt-1 text-xs leading-relaxed text-zinc-400">{metric.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {project.proof && (
+        <section>
+          <h3 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            <Code2 size={14} />
+            What makes the work verifiable
+          </h3>
+          <div className="space-y-3">
+            {project.proof.evidence.map((item) => (
+              <div key={item.label} className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-3">
+                <p className="text-sm font-semibold text-zinc-100">{item.label}</p>
+                <p className="mt-1 text-xs leading-relaxed text-zinc-400">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {project.proof && (
+        <section>
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            Implementation decisions
+          </h3>
+          <div className="space-y-3">
+            {project.proof.decisions.map((item, i) => (
+              <div key={item.label} className="flex items-start gap-3">
+                <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-950/60 text-xs font-bold text-emerald-300 ring-1 ring-emerald-800/70">
+                  {i + 1}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-zinc-100">{item.label}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-400">{item.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {hasWorkflow && (
+        <section>
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            Live workflow receipts
+          </h3>
+          <div className="space-y-2.5">
+            {project.workflow?.map((step, i) => (
+              <div key={step} className="flex items-start gap-2.5">
+                <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-zinc-800 text-[10px] font-bold text-zinc-300">
+                  {i + 1}
+                </span>
+                <p className="text-sm leading-relaxed text-zinc-300">{step}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {hasFeatures && (
+        <section>
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            {project.features?.length} interpreter-first features
+          </h3>
+          <div className="space-y-2.5">
+            {project.features?.map((feature) => (
+              <div key={feature} className="flex items-start gap-2">
+                <Check size={14} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                <p className="text-sm leading-relaxed text-zinc-400">{feature}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {(project.repoUrl || project.liveUrl) && (
+        <section className="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-4">
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            Verify the project
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {project.repoUrl && (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-800 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:bg-zinc-700 hover:text-white"
+              >
+                <Github size={14} />
+                Source Code
+                <ExternalLink size={12} />
+              </a>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-100 px-3 py-2 text-xs font-semibold text-zinc-950 transition hover:bg-white"
+              >
+                Live App
+                <ExternalLink size={12} />
+              </a>
+            )}
+          </div>
+        </section>
+      )}
+    </div>
+  );
 
   return (
     <AnimatePresence>
@@ -62,26 +206,33 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="relative flex max-h-[95vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl"
+          className="relative flex max-h-[95vh] w-full max-w-7xl flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-zinc-800 px-4 py-3 sm:px-6 sm:py-4">
             <div className="min-w-0">
-              <h2 className="truncate text-lg font-bold text-white">{project.title}</h2>
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="truncate text-lg font-bold text-white">{project.title}</h2>
+                {hasProof && (
+                  <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-emerald-300 ring-1 ring-emerald-500/20">
+                    Flagship case study
+                  </span>
+                )}
+              </div>
               <p className="truncate text-xs text-zinc-400">{project.tagline}</p>
             </div>
             <div className="flex items-center gap-1 sm:gap-2">
-              {hasFeatures && (
+              {hasDetails && (
                 <button
-                  onClick={() => setShowFeatures(!showFeatures)}
+                  onClick={() => setShowDetails(!showDetails)}
                   className={`hidden sm:inline-flex rounded-lg px-3 py-2 text-xs font-semibold transition ${
-                    showFeatures
+                    showDetails
                       ? 'bg-emerald-950 text-emerald-400 ring-1 ring-emerald-800'
                       : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
-                  {showFeatures ? 'Hide Features' : `View ${project.features?.length} Features`}
+                  {showDetails ? `Hide ${detailsLabel}` : `Show ${detailsLabel}`}
                 </button>
               )}
               {project.repoUrl && (
@@ -173,65 +324,44 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
               )}
             </div>
 
-            {/* Feature Sidebar (collapsible, desktop only) */}
+              {/* Proof/details sidebar (collapsible, desktop only) */}
             <AnimatePresence>
-              {showFeatures && hasFeatures && (
+              {showDetails && hasDetails && (
                 <motion.div
                   initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: 320, opacity: 1 }}
+                  animate={{ width: 380, opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
                   transition={{ duration: 0.25 }}
                   className="hidden lg:flex flex-col border-l border-zinc-800 bg-zinc-900/50 overflow-hidden"
                 >
-                  <div className="flex-1 overflow-y-auto p-5">
-                    <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                      {project.features?.length} Interpreter-First Features
-                    </h3>
-                    <div className="space-y-3">
-                      {project.features?.map((f, i) => (
-                        <div key={i} className="flex items-start gap-2.5">
-                          <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-950/50 text-emerald-400 text-xs font-bold">
-                            {i + 1}
-                          </span>
-                          <p className="text-sm text-zinc-300 leading-relaxed">{f}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <div className="flex-1 overflow-y-auto p-5">{renderDetailsPanel()}</div>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
 
-          {/* Mobile Features Toggle */}
-          {hasFeatures && (
+          {/* Mobile details toggle */}
+          {hasDetails && (
             <div className="border-t border-zinc-800 bg-zinc-900 px-4 py-3 sm:hidden">
               <button
-                onClick={() => setShowFeatures(!showFeatures)}
+                onClick={() => setShowDetails(!showDetails)}
                 className="flex w-full items-center justify-between rounded-lg bg-zinc-800 px-4 py-3 text-sm font-semibold text-zinc-200"
               >
-                <span>{project.features?.length} Features</span>
+                <span>{detailsLabel}</span>
                 <ChevronRight
                   size={16}
-                  className={`transition-transform ${showFeatures ? 'rotate-90' : ''}`}
+                  className={`transition-transform ${showDetails ? 'rotate-90' : ''}`}
                 />
               </button>
               <AnimatePresence>
-                {showFeatures && (
+                {showDetails && (
                   <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
                     exit={{ height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-3 space-y-2.5 pb-2">
-                      {project.features?.map((f, i) => (
-                        <div key={i} className="flex items-start gap-2">
-                          <Check size={14} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                          <p className="text-sm text-zinc-400">{f}</p>
-                        </div>
-                      ))}
-                    </div>
+                    <div className="mt-4 max-h-[42vh] overflow-y-auto pb-2">{renderDetailsPanel()}</div>
                   </motion.div>
                 )}
               </AnimatePresence>

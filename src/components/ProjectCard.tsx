@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Github, Images, Play } from 'lucide-react';
+import { BadgeCheck, Code2, Github, Images, Play } from 'lucide-react';
 import type { FeaturedProject } from '../data/portfolio';
 
 interface Props {
@@ -14,6 +14,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
   const hasLive = !!project.liveUrl;
   const hasRepo = !!project.repoUrl;
   const hasGallery = project.screenshots.length > 0;
+  const hasProof = !!project.proof;
 
   if (featured) {
     return (
@@ -36,6 +37,15 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent lg:bg-gradient-to-r" />
+
+          {hasProof && (
+            <div className="absolute left-4 top-4">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-emerald-200 backdrop-blur-md ring-1 ring-emerald-400/30">
+                <BadgeCheck size={14} />
+                Flagship proof view
+              </span>
+            </div>
+          )}
 
           <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
             {project.badges?.map((badge) => (
@@ -69,10 +79,38 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
             {project.description}
           </p>
 
+          {project.proof && (
+            <div className="mb-6 rounded-2xl border border-emerald-900/40 bg-emerald-950/10 p-4 ring-1 ring-emerald-500/10">
+              <div className="mb-4 flex items-start gap-3">
+                <span className="mt-0.5 rounded-xl bg-emerald-500/10 p-2 text-emerald-300 ring-1 ring-emerald-500/20">
+                  <Code2 size={18} />
+                </span>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                    {project.proof.heading}
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-zinc-300">{project.proof.role}</p>
+                </div>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                {project.proof.metrics.map((metric) => (
+                  <div key={metric.label} className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+                      {metric.label}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-zinc-100">{metric.value}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-zinc-400">{metric.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Workflow preview */}
           {project.workflow && (
             <div className="mb-6 space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">The Loop</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Live Workflow</p>
               <div className="space-y-1.5">
                 {project.workflow.slice(0, 4).map((step, i) => (
                   <div key={i} className="flex items-start gap-2 text-sm text-zinc-400">
@@ -82,7 +120,9 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
                     <span className="line-clamp-1">{step}</span>
                   </div>
                 ))}
-                <p className="pl-6 text-xs text-zinc-500">+ {project.workflow.length - 4} more steps →</p>
+                {project.workflow.length > 4 && (
+                  <p className="pl-6 text-xs text-zinc-500">+ {project.workflow.length - 4} more steps</p>
+                )}
               </div>
             </div>
           )}
@@ -107,7 +147,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
                 className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-950/50 px-4 py-2.5 text-sm font-semibold text-emerald-300 ring-1 ring-emerald-800 hover:bg-emerald-900/50 transition"
               >
                 <Images size={16} />
-                Features
+                {hasProof ? 'Proof View' : 'Features'}
               </button>
             )}
             {hasLive && (
