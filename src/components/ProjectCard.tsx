@@ -27,16 +27,19 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
       >
         {/* Hero Image */}
         <div
-          className="relative aspect-[16/9] overflow-hidden bg-zinc-800 cursor-pointer lg:aspect-auto lg:w-3/5"
+          className="relative aspect-[16/10] overflow-hidden bg-zinc-950 cursor-pointer lg:w-[58%] lg:shrink-0 lg:self-start"
           onClick={() => hasGallery && onOpen(project)}
         >
           <img
             src={project.image}
-            alt={project.title}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
+            alt={`${project.title} interface preview`}
+            width={1920}
+            height={1080}
+            className="h-full w-full object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"
+            loading="eager"
+            decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent lg:bg-gradient-to-r" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent" />
 
           {hasProof && (
             <div className="absolute left-4 top-4">
