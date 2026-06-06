@@ -179,7 +179,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       'Inline number editor — correct misheard digits without breaking flow',
     ],
     screenshots: [
-      { src: '/catintassist1.png', caption: 'Live dual-column workspace: English and Spanish streams side by side with suggested translation, soundboard, and session metrics.' },
+      { src: '/catintassist-thumb.png', caption: 'Live dual-column workspace: English and Spanish streams side by side with suggested translation, soundboard, and session metrics.' },
       { src: '/catintassist-dashboard.png', caption: 'Production scoreboard: daily goals, earnings, off-call tracking, and sprint progress in one interpreter-first dashboard.' },
       { src: '/catintassist.png', caption: 'Full session HUD with live transcript, dialer context, and gamified earnings view during an active call.' },
       { src: '/catintassist2.png', caption: 'Medical terminology support: uncommon orthopedics terms get suggested equivalents so the interpreter can decide fast.' },
