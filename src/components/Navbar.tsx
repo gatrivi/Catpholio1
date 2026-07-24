@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { MAIN_NAV, PORTFOLIO_CONTENT, DIGITAL_MENU_CONTENT } from '../content';
+import { LanguageToggle } from './LanguageToggle';
+import { getDigitalMenuContent, getMainNav, getPortfolioData } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { locale } = useLocale();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,8 +21,10 @@ export const Navbar = () => {
   }, []);
 
   const isDigitalMenu = location.pathname === '/store/digital-menu';
-  const navLinks = isDigitalMenu ? DIGITAL_MENU_CONTENT.NAV : MAIN_NAV;
-  const brandName = isDigitalMenu ? DIGITAL_MENU_CONTENT.BRAND.name : PORTFOLIO_CONTENT.BRAND.name;
+  const portfolio = getPortfolioData(locale);
+  const digitalMenu = getDigitalMenuContent(locale);
+  const navLinks = isDigitalMenu ? digitalMenu.NAV : getMainNav(locale);
+  const brandName = isDigitalMenu ? digitalMenu.BRAND.name : portfolio.BRAND.name;
 
   return (
     <>
@@ -64,13 +69,15 @@ export const Navbar = () => {
             
             {isDigitalMenu && (
               <a
-                href={DIGITAL_MENU_CONTENT.BRAND.cta.primary.link}
+                href={digitalMenu.BRAND.cta.primary.link}
                 className="px-4 py-2 bg-zinc-100 text-zinc-950 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-white transition-colors"
               >
-                {DIGITAL_MENU_CONTENT.BRAND.cta.primary.label}
+                {digitalMenu.BRAND.cta.primary.label}
                 <ArrowUpRight size={14} />
               </a>
             )}
+
+            <LanguageToggle />
           </div>
 
           {/* Mobile Toggle */}
@@ -96,12 +103,15 @@ export const Navbar = () => {
               <span className="text-xl font-bold tracking-tighter text-zinc-100">
                 {brandName}
               </span>
-              <button
-                className="p-2 text-zinc-400 hover:text-zinc-100 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <X size={24} />
-              </button>
+              <div className="flex items-center gap-2">
+                <LanguageToggle />
+                <button
+                  className="p-2 text-zinc-400 hover:text-zinc-100 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <X size={24} />
+                </button>
+              </div>
             </div>
 
             <div className="flex flex-col gap-8">
@@ -131,10 +141,10 @@ export const Navbar = () => {
             {isDigitalMenu && (
               <div className="mt-auto pt-12 border-t border-zinc-800">
                 <a
-                  href={DIGITAL_MENU_CONTENT.BRAND.cta.primary.link}
+                  href={digitalMenu.BRAND.cta.primary.link}
                   className="w-full py-4 bg-zinc-100 text-zinc-950 rounded-xl text-center font-bold flex items-center justify-center gap-2"
                 >
-                  {DIGITAL_MENU_CONTENT.BRAND.cta.primary.label}
+                  {digitalMenu.BRAND.cta.primary.label}
                   <ArrowUpRight size={18} />
                 </a>
               </div>

@@ -1,9 +1,11 @@
 import { motion } from 'motion/react';
 import { Check, ArrowRight, Zap } from 'lucide-react';
-import { DIGITAL_MENU_CONTENT } from '../content';
+import { getDigitalMenuContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
 
 export const Pricing = () => {
-  const { SECTIONS, PRICING, UI, BRAND } = DIGITAL_MENU_CONTENT;
+  const { locale } = useLocale();
+  const { SECTIONS, PRICING, UI, BRAND } = getDigitalMenuContent(locale);
 
   return (
     <section id="pricing" className="py-24 px-6 relative overflow-hidden">

@@ -1,9 +1,11 @@
 import { motion } from 'motion/react';
 import { MessageCircle } from 'lucide-react';
-import { DIGITAL_MENU_CONTENT } from '../content';
+import { getDigitalMenuContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
 
 export const WhatsAppFloat = () => {
-  const { BRAND } = DIGITAL_MENU_CONTENT;
+  const { locale } = useLocale();
+  const { BRAND } = getDigitalMenuContent(locale);
 
   return (
     <motion.a

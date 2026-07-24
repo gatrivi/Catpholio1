@@ -1,10 +1,14 @@
 import { motion } from 'motion/react';
-import { APP_STORE_CONTENT } from '../content';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getAppStoreContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 export const AppStore = () => {
-  const { TITLE, SUBTITLE, APPS } = APP_STORE_CONTENT;
+  const { locale } = useLocale();
+  const ui = getUiText(locale);
+  const { TITLE, SUBTITLE, APPS } = getAppStoreContent(locale);
 
   return (
     <motion.div
@@ -53,7 +57,7 @@ export const AppStore = () => {
             </p>
 
             <div className="flex items-center gap-2 text-zinc-100 font-bold group-hover:gap-4 transition-all">
-              View Product <ArrowRight size={18} />
+              {ui.appStore.viewProduct} <ArrowRight size={18} />
             </div>
           </Link>
         ))}

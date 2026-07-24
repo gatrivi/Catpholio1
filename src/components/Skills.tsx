@@ -1,20 +1,26 @@
 import { motion } from 'motion/react';
-import { SKILLS } from '../data/portfolio';
+import { getPortfolioData } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 export const Skills = () => {
+  const { locale } = useLocale();
+  const portfolio = getPortfolioData(locale);
+  const ui = getUiText(locale);
+
   return (
     <section id="skills" className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
       <div className="mb-16">
         <span className="font-mono text-sm uppercase tracking-widest text-zinc-500 block mb-4">
-          Toolkit
+          {ui.skills.toolkitLabel}
         </span>
         <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-zinc-100">
-          Skills
+          {ui.skills.skillsTitle}
         </h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {SKILLS.map((group, i) => (
+        {portfolio.SKILLS.map((group, i) => (
           <motion.div
             key={group.category}
             initial={{ opacity: 0, y: 20 }}

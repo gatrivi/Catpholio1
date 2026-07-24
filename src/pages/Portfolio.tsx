@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { FEATURED_PROJECTS, BRAND } from '../data/portfolio';
 import { ProjectCard } from '../components/ProjectCard';
 import { ProjectGallery } from '../components/ProjectGallery';
 import { Skills } from '../components/Skills';
@@ -9,13 +8,20 @@ import { Contact } from '../components/Contact';
 import { OriginStory } from '../components/OriginStory';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import type { FeaturedProject } from '../data/portfolio';
+import { getPortfolioData } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 export const Portfolio = () => {
   const [activeProject, setActiveProject] = useState<FeaturedProject | null>(null);
 
-  const heroProject = FEATURED_PROJECTS[0];
-  const rowOne = FEATURED_PROJECTS.slice(1, 3);
-  const rowTwo = FEATURED_PROJECTS.slice(3, 5);
+  const { locale } = useLocale();
+  const portfolio = getPortfolioData(locale);
+  const ui = getUiText(locale);
+
+  const heroProject = portfolio.FEATURED_PROJECTS[0];
+  const rowOne = portfolio.FEATURED_PROJECTS.slice(1, 3);
+  const rowTwo = portfolio.FEATURED_PROJECTS.slice(3, 5);
 
   return (
     <motion.div
@@ -28,18 +34,18 @@ export const Portfolio = () => {
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[60vh] py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
         <div>
           <span className="font-mono text-sm uppercase tracking-widest text-zinc-400 mb-4 block">
-            {BRAND.title}
+            {portfolio.BRAND.title}
           </span>
           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-6">
-            <span className="text-zinc-100">{BRAND.name}</span>
+            <span className="text-zinc-100">{portfolio.BRAND.name}</span>
           </h1>
           <p className="text-xl text-zinc-400 max-w-lg mb-8 font-light leading-relaxed">
-            {BRAND.bio}
+            {portfolio.BRAND.bio}
           </p>
           <div className="flex gap-4">
-            {BRAND.socials.github && (
+            {portfolio.BRAND.socials.github && (
               <a
-                href={BRAND.socials.github}
+                href={portfolio.BRAND.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-zinc-900 rounded-full hover:bg-zinc-800 transition-colors"
@@ -47,9 +53,9 @@ export const Portfolio = () => {
                 <Github size={20} />
               </a>
             )}
-            {BRAND.socials.linkedin && (
+            {portfolio.BRAND.socials.linkedin && (
               <a
-                href={BRAND.socials.linkedin}
+                href={portfolio.BRAND.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-zinc-900 rounded-full hover:bg-zinc-800 transition-colors"
@@ -57,9 +63,9 @@ export const Portfolio = () => {
                 <Linkedin size={20} />
               </a>
             )}
-            {BRAND.socials.email && (
+            {portfolio.BRAND.socials.email && (
               <a
-                href={`mailto:${BRAND.socials.email}`}
+                href={`mailto:${portfolio.BRAND.socials.email}`}
                 className="p-3 bg-zinc-900 rounded-full hover:bg-zinc-800 transition-colors"
               >
                 <Mail size={20} />
@@ -86,13 +92,13 @@ export const Portfolio = () => {
       <section id="projects" className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
         <div className="mb-16 text-center">
           <span className="font-mono text-sm uppercase tracking-widest text-zinc-500 block mb-4">
-            Work
+            {ui.portfolio.workLabel}
           </span>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-zinc-100">
-            Featured Projects
+            {ui.portfolio.featuredProjectsLabel}
           </h2>
           <p className="mt-4 text-lg text-zinc-400 max-w-2xl mx-auto">
-            Production-grade tools shipped to real users. Live demos available.
+            {ui.portfolio.featuredProjectsSubtitle}
           </p>
         </div>
 

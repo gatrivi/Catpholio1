@@ -1,11 +1,15 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowDown } from 'lucide-react';
-import { DIGITAL_MENU_CONTENT } from '../content';
+import { getDigitalMenuContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
 
 export const Hero = () => {
-  const { BRAND } = DIGITAL_MENU_CONTENT;
+  const { locale } = useLocale();
+  const { BRAND } = getDigitalMenuContent(locale);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1000], [0, 300]);
+  const heroAlt = locale === 'es-ES' ? 'Restaurante' : 'Restaurant';
+  const showcaseAlt = locale === 'es-ES' ? 'Carta digital de restaurante con fotos de platos' : 'Digital menu with dish photos';
 
   return (
     <section className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-24 overflow-hidden">
@@ -15,7 +19,7 @@ export const Hero = () => {
       >
         <img 
           src={BRAND.heroBackground} 
-          alt="Restaurante" 
+          alt={heroAlt}
           className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
           referrerPolicy="no-referrer"
           onError={(e) => {
@@ -87,7 +91,7 @@ export const Hero = () => {
           <div className="relative w-72 h-auto md:w-96 lg:w-[28rem] rounded-3xl overflow-hidden border-4 border-zinc-800 shadow-2xl bg-zinc-900">
             <img 
               src="/tmm-store0.png" 
-              alt="Carta digital de restaurante con fotos de platos" 
+              alt={showcaseAlt}
               className="w-full h-auto object-cover"
               referrerPolicy="no-referrer"
               onError={(e) => {

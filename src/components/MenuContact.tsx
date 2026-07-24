@@ -1,9 +1,13 @@
 import { motion } from 'motion/react';
 import { MessageSquare, Mail, Instagram, ArrowRight } from 'lucide-react';
-import { DIGITAL_MENU_CONTENT } from '../content';
+import { getDigitalMenuContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 export const MenuContact = () => {
-  const { BRAND, CONTACT, UI } = DIGITAL_MENU_CONTENT;
+  const { locale } = useLocale();
+  const ui = getUiText(locale);
+  const { BRAND, CONTACT, UI } = getDigitalMenuContent(locale);
 
   return (
     <section id="contact" className="py-24 px-6 bg-zinc-950">
@@ -13,8 +17,7 @@ export const MenuContact = () => {
             {CONTACT.headline}
           </span>
           <h2 className="text-5xl md:text-7xl font-bold tracking-tighter text-zinc-100 mb-8">
-            Tu carta lista <br />
-            <span className="text-zinc-500">mañana mismo.</span>
+            {ui.menuContact.h2Title}
           </h2>
           <p className="text-xl text-zinc-400 font-light leading-relaxed mb-12 max-w-lg">
             {CONTACT.subheadline}
@@ -53,7 +56,7 @@ export const MenuContact = () => {
           <div className="w-20 h-20 bg-zinc-100 text-zinc-950 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
             <MessageSquare size={32} />
           </div>
-          <h3 className="text-3xl font-bold text-zinc-100 mb-4">¿Dudas? Escribinos.</h3>
+          <h3 className="text-3xl font-bold text-zinc-100 mb-4">{ui.menuContact.doubtsTitle}</h3>
           <p className="text-zinc-400 font-light mb-10">
             {UI.contact.whatsappSubtext}
           </p>

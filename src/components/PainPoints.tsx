@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
-import { DIGITAL_MENU_CONTENT } from '../content';
+import { getDigitalMenuContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
 
 export const PainPoints = () => {
-  const { SECTIONS, PAIN_POINTS } = DIGITAL_MENU_CONTENT;
+  const { locale } = useLocale();
+  const { SECTIONS, PAIN_POINTS } = getDigitalMenuContent(locale);
 
   return (
     <section id="pain-points" className="py-24 px-6 bg-zinc-950">

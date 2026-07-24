@@ -11,6 +11,7 @@ import { Portfolio } from './pages/Portfolio';
 import { AppStore } from './pages/AppStore';
 import { DigitalMenu } from './pages/DigitalMenu';
 import { useEffect } from 'react';
+import { LocaleProvider } from './i18n/LocaleProvider';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -45,15 +46,17 @@ const AnimatedRoutes = () => {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-zinc-950 text-zinc-50 font-sans selection:bg-zinc-800 selection:text-zinc-100 scroll-smooth">
-        <Navbar />
-        <div className="flex-grow">
-          <AnimatedRoutes />
+    <LocaleProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen flex flex-col bg-zinc-950 text-zinc-50 font-sans selection:bg-zinc-800 selection:text-zinc-100 scroll-smooth">
+          <Navbar />
+          <div className="flex-grow">
+            <AnimatedRoutes />
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </LocaleProvider>
   );
 }

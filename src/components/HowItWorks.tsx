@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Send, Clock, QrCode, Edit3 } from 'lucide-react';
-import { DIGITAL_MENU_CONTENT } from '../content';
+import { getDigitalMenuContent } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
 
 const icons = {
   send: Send,
@@ -10,7 +11,8 @@ const icons = {
 };
 
 export const HowItWorks = () => {
-  const { SECTIONS, HOW_IT_WORKS } = DIGITAL_MENU_CONTENT;
+  const { locale } = useLocale();
+  const { SECTIONS, HOW_IT_WORKS } = getDigitalMenuContent(locale);
 
   return (
     <section id="como-funciona" className="py-24 px-6 bg-zinc-900/30">

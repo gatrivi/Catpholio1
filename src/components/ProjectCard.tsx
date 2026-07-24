@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
 import { Github, Images, Play } from 'lucide-react';
 import type { FeaturedProject } from '../data/portfolio';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 interface Props {
   project: FeaturedProject;
@@ -11,6 +13,9 @@ interface Props {
 }
 
 export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
+  const { locale } = useLocale();
+  const ui = getUiText(locale);
+
   const hasLive = !!project.liveUrl;
   const hasRepo = !!project.repoUrl;
   const hasGallery = project.screenshots.length > 0;
@@ -52,7 +57,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
             <div className="absolute bottom-4 right-4 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
               <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md ring-1 ring-white/20">
                 <Images size={14} />
-                {project.screenshots.length} Screens
+                {project.screenshots.length} {ui.projectCard.screensLabel}
               </span>
             </div>
           )}
@@ -72,7 +77,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
           {/* Workflow preview */}
           {project.workflow && (
             <div className="mb-6 space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">The Loop</p>
+              <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">{ui.projectCard.theLoopLabel}</p>
               <div className="space-y-1.5">
                 {project.workflow.slice(0, 4).map((step, i) => (
                   <div key={i} className="flex items-start gap-2 text-sm text-zinc-400">
@@ -82,7 +87,9 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
                     <span className="line-clamp-1">{step}</span>
                   </div>
                 ))}
-                <p className="pl-6 text-xs text-zinc-500">+ {project.workflow.length - 4} more steps →</p>
+                <p className="pl-6 text-xs text-zinc-500">
+                  {ui.projectCard.moreStepsTemplate(project.workflow.length - 4)}
+                </p>
               </div>
             </div>
           )}
@@ -107,7 +114,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
                 className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-950/50 px-4 py-2.5 text-sm font-semibold text-emerald-300 ring-1 ring-emerald-800 hover:bg-emerald-900/50 transition"
               >
                 <Images size={16} />
-                Features
+                {ui.projectCard.featuresCta}
               </button>
             )}
             {hasLive && (
@@ -118,7 +125,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
                 className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-100 px-4 py-2.5 text-sm font-semibold text-zinc-950 hover:bg-white transition"
               >
                 <Play size={16} />
-                Live App
+                {ui.projectCard.liveAppCta}
               </a>
             )}
             {hasRepo && (
@@ -129,7 +136,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
                 className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-zinc-200 hover:bg-zinc-700 hover:text-white transition"
               >
                 <Github size={16} />
-                Repo
+                {ui.projectCard.repoCta}
               </a>
             )}
           </div>
@@ -163,7 +170,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
           <div className="absolute bottom-3 right-3 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
             <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white backdrop-blur-md ring-1 ring-white/20">
               <Images size={14} />
-              {project.screenshots.length}
+              {project.screenshots.length} {ui.projectCard.screensLabel}
             </span>
           </div>
         )}
@@ -198,7 +205,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
               className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-950/50 px-3 py-2 text-xs font-semibold text-emerald-300 ring-1 ring-emerald-800 hover:bg-emerald-900/50 transition"
             >
               <Images size={14} />
-              Features
+                {ui.projectCard.featuresCta}
             </button>
           )}
           {hasLive && (
@@ -209,7 +216,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
               className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-100 px-3 py-2 text-xs font-semibold text-zinc-950 hover:bg-white transition"
             >
               <Play size={14} />
-              Live
+                {ui.projectCard.liveCta}
             </a>
           )}
           {hasRepo && (
@@ -220,7 +227,7 @@ export const ProjectCard = ({ project, index, onOpen, featured }: Props) => {
               className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-800 px-3 py-2 text-xs font-semibold text-zinc-200 hover:bg-zinc-700 hover:text-white transition"
             >
               <Github size={14} />
-              Repo
+                {ui.projectCard.repoCta}
             </a>
           )}
         </div>

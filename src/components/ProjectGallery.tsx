@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight, Github, Check } from 'lucide-react';
 import type { FeaturedProject } from '../data/portfolio';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 interface Props {
   project: FeaturedProject | null;
@@ -9,6 +11,9 @@ interface Props {
 }
 
 export const ProjectGallery = ({ project, onClose }: Props) => {
+  const { locale } = useLocale();
+  const ui = getUiText(locale);
+
   const [index, setIndex] = useState(0);
   const [showFeatures, setShowFeatures] = useState(false);
 
@@ -47,6 +52,7 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
 
   const current = project.screenshots[index];
   const hasFeatures = (project.features?.length ?? 0) > 0;
+  const featuresCount = project.features?.length ?? 0;
 
   return (
     <AnimatePresence>
@@ -81,7 +87,7 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
                       : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
-                  {showFeatures ? 'Hide Features' : `View ${project.features?.length} Features`}
+                  {showFeatures ? ui.projectGallery.hideFeatures : ui.projectGallery.viewFeaturesTemplate(featuresCount)}
                 </button>
               )}
               {project.repoUrl && (
@@ -90,7 +96,7 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white transition"
-                  title="View Code"
+                  title={ui.projectGallery.viewCodeTitle}
                 >
                   <Github size={18} />
                 </a>
@@ -98,7 +104,7 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
               <button
                 onClick={onClose}
                 className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white transition"
-                title="Close (Esc)"
+                title={ui.projectGallery.closeEscTitle}
               >
                 <X size={18} />
               </button>
@@ -185,7 +191,7 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
                 >
                   <div className="flex-1 overflow-y-auto p-5">
                     <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                      {project.features?.length} Interpreter-First Features
+                      {ui.projectGallery.interpreterFirstFeaturesLabel(featuresCount)}
                     </h3>
                     <div className="space-y-3">
                       {project.features?.map((f, i) => (
@@ -210,7 +216,7 @@ export const ProjectGallery = ({ project, onClose }: Props) => {
                 onClick={() => setShowFeatures(!showFeatures)}
                 className="flex w-full items-center justify-between rounded-lg bg-zinc-800 px-4 py-3 text-sm font-semibold text-zinc-200"
               >
-                <span>{project.features?.length} Features</span>
+                    <span>{ui.projectGallery.featuresLabel(featuresCount)}</span>
                 <ChevronRight
                   size={16}
                   className={`transition-transform ${showFeatures ? 'rotate-90' : ''}`}

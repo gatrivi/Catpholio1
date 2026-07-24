@@ -1,20 +1,26 @@
 import { motion } from 'motion/react';
-import { EXPERIENCE } from '../data/portfolio';
+import { getPortfolioData } from '../content';
+import { useLocale } from '../i18n/LocaleProvider';
+import { getUiText } from '../i18n/ui';
 
 export const Experience = () => {
+  const { locale } = useLocale();
+  const portfolio = getPortfolioData(locale);
+  const ui = getUiText(locale);
+
   return (
     <section id="experience" className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
       <div className="mb-16">
         <span className="font-mono text-sm uppercase tracking-widest text-zinc-500 block mb-4">
-          Background
+          {ui.experience.backgroundLabel}
         </span>
         <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-zinc-100">
-          Experience
+          {ui.experience.experienceTitle}
         </h2>
       </div>
 
       <div className="max-w-3xl space-y-16 border-l border-zinc-800 pl-8">
-        {EXPERIENCE.map((job, i) => (
+        {portfolio.EXPERIENCE.map((job, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, x: -20 }}
